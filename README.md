@@ -14,14 +14,13 @@ Then build it by running
 ```console
 docker run -it --rm -v `pwd`:/project -w /project esp-rtos make -C sonoff_basic_pwm_with_relay all
 ```
-
 Then flash it (and optionally immediately run monitor)
 
 ```console
-docker run -it --device=/dev/ttyUSB0 --rm -v `pwd`:/project -w /project esp-rtos make -C sonoff_basic_pwm_with_relay flash monitor
+docker run -it --rm -v `pwd`:/project -w /project --device=/dev/ttyUSB0 esp-rtos make -C sonoff_basic_pwm_with_relay flash
 ```
 
-NOTE: personally I do a lot of stuff in Docker containers, so I have following helper function in my ~/.bashrc:
+NOTE: you can have the following helper function in  ~/.bashrc:
 
 ```console
 docker-run() {
@@ -32,5 +31,11 @@ docker-run() {
 Then, to run a container I just do
 
 ```console
-docker-run esp-rtos make -C examples/sonoff_basic all
+docker-run esp-rtos make -C sonoff_basic_pwm_with_relay all
 ```
+
+
+
+
+
+

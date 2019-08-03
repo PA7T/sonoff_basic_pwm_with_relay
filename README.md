@@ -18,7 +18,7 @@ docker run -it --rm -v `pwd`:/project -w /project esp-rtos make -C sonoff_basic_
 Then flash it (and optionally immediately run monitor)
 
 ```console
-make -C examples/sonoff_basic flash monitor
+docker run -it --device=/dev/ttyUSB0 --rm -v `pwd`:/project -w /project esp-rtos make -C sonoff_basic_pwm_with_relay flash monitor
 ```
 
 NOTE: personally I do a lot of stuff in Docker containers, so I have following helper function in my ~/.bashrc:

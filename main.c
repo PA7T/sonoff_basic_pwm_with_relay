@@ -118,12 +118,12 @@ void lightSET_task(void *pvParameters) {
     int w;
     if (on) {
         w = (UINT16_MAX - UINT16_MAX*bri/100);
-        pwm_set_duty(UINT16_MAX-w);
+        pwm_set_duty(w);
     	relay_write(true);
         printf("ON  %3d [%5d]\n", (int)bri , w);
     } else {
         printf("OFF\n");
-        pwm_set_duty(0);
+        pwm_set_duty(UINT16_MAX);
     	relay_write(false);
     }
     vTaskDelete(NULL);
@@ -142,7 +142,7 @@ void light_init() {
     printf("on = false  bri = 100 %%\n");
     pwm_set_freq(920);
     printf("PWMpwm_set_freq = 920 Hz  pwm_set_duty = 0 = 0%%\n");
-    pwm_set_duty(0);
+    pwm_set_duty(UINT16_MAX);
     pwm_start();
     lightSET();
 }

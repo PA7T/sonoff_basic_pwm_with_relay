@@ -8,3 +8,29 @@ library](https://github.com/maximkulkin/esp-homekit).
 ## Usage
 
 See [build instructions](https://github.com/maximkulkin/esp-homekit-demo/wiki/Build-instructions)
+
+Then build it by running
+
+```console
+docker run -it --rm -v `pwd`:/project -w /project esp-rtos make -C sonoff_basic_pwm_with_relay all
+```
+
+Then flash it (and optionally immediately run monitor)
+
+```console
+make -C examples/sonoff_basic flash monitor
+```
+
+NOTE: personally I do a lot of stuff in Docker containers, so I have following helper function in my ~/.bashrc:
+
+```console
+docker-run() {
+  docker run -it --rm -v $(pwd):/project -w /project "$@"
+}
+```
+
+Then, to run a container I just do
+
+```console
+docker-run esp-rtos make -C examples/sonoff_basic all
+```

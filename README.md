@@ -31,7 +31,7 @@ docker-run() {
 Then, to run a container to build flash and monitor just do
 
 ```console
-docker-run --device=/dev/ttyUSB0 esp-rtos make -C examples/sonoff_basic all flash monitor
+docker-run --device=/dev/ttyUSB0 esp-rtos make -C sonoff_basic_pwm_with_relay all flash monitor
 ```
 
 

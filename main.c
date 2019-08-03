@@ -140,7 +140,7 @@ void light_init() {
     on=false;
     bri=100;
     printf("on = false  bri = 100 %%\n");
-    pwm_set_freq(1000);
+    pwm_set_freq(920);
     printf("PWMpwm_set_freq = 1000 Hz  pwm_set_duty = 0 = 0%%\n");
     pwm_set_duty(UINT16_MAX);
     pwm_start();

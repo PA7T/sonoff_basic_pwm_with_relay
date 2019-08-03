@@ -42,11 +42,11 @@ modified to do pulse-width-modulation (PWM) of LED
 // The GPIO pin that is connected to the relay on the Sonoff Basic.
 const int relay_gpio = 12;
 // The GPIO pin that is connected to the LED on the Sonoff Basic.
-const int led_gpio = 13;
+const int led_gpio = 14;
 // The GPIO pin that is connected to the button on the Sonoff Basic.
 const int button_gpio = 0;
 // The GPIO pin that is connected to the header on the Sonoff Basic (external switch).
-const int toggle_gpio = 14;
+// const int toggle_gpio = 0;
 
 #include <pwm.h>
 // The PWM pin that is connected to the PWM daughter board.
@@ -107,7 +107,7 @@ static void wifi_init() {
 
 void gpio_init() {
     gpio_enable(relay_gpio, GPIO_OUTPUT);
-    gpio_enable(toggle_gpio, GPIO_INPUT);
+    // gpio_enable(toggle_gpio, GPIO_INPUT);
     pins[0] = led_gpio;
     pwm_init(1, pins, false);
     relay_write(false);
@@ -226,13 +226,13 @@ void button_callback(uint8_t gpio, button_event_t event) {
 }
 
 
-void toggle_callback(uint8_t gpio) {
-    printf("Toggling lightbulb due to switch at GPIO %2d\n", gpio);
-    lightbulb_on.value.bool_value = !lightbulb_on.value.bool_value;
-    on = lightbulb_on.value.bool_value;
-    lightSET();
-    homekit_characteristic_notify(&lightbulb_on, lightbulb_on.value);
-}
+// void toggle_callback(uint8_t gpio) {
+//     printf("Toggling lightbulb due to switch at GPIO %2d\n", gpio);
+//     lightbulb_on.value.bool_value = !lightbulb_on.value.bool_value;
+//     on = lightbulb_on.value.bool_value;
+//     lightSET();
+//     homekit_characteristic_notify(&lightbulb_on, lightbulb_on.value);
+// }
 
 
 homekit_accessory_t *accessories[] = {
@@ -301,7 +301,7 @@ void user_init(void) {
     if (button_create(button_gpio, 0, 4000, button_callback)) {
         printf("Failed to initialize button\n");
     }
-    if (toggle_create(toggle_gpio, toggle_callback)) {
-        printf("Failed to initialize toggle\n");
-    }
+    // if (toggle_create(toggle_gpio, toggle_callback)) {
+    //     printf("Failed to initialize toggle\n");
+    // }
 }

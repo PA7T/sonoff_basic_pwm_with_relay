@@ -119,12 +119,13 @@ void lightSET_task(void *pvParameters) {
     if (on) {
         w = (UINT16_MAX - UINT16_MAX*bri/100);
         pwm_set_duty(w);
-    	relay_write(true);
+    	  relay_write(true);
         printf("ON  %3d [%5d]\n", (int)bri , w);
     } else {
         printf("OFF\n");
+        relay_write(false);
+        vTaskDelay(10000 / portTICK_PERIOD_MS);
         pwm_set_duty(UINT16_MAX);
-    	relay_write(false);
     }
     vTaskDelete(NULL);
 }
@@ -246,7 +247,7 @@ homekit_accessory_t *accessories[] = {
                 HOMEKIT_CHARACTERISTIC(MANUFACTURER, "iTEAD"),
                 HOMEKIT_CHARACTERISTIC(SERIAL_NUMBER, "PWM Dimmer"),
                 HOMEKIT_CHARACTERISTIC(MODEL, "Sonoff Basic"),
-                HOMEKIT_CHARACTERISTIC(FIRMWARE_REVISION, "0.1.6"),
+                HOMEKIT_CHARACTERISTIC(FIRMWARE_REVISION, "1.1.0"),
                 HOMEKIT_CHARACTERISTIC(IDENTIFY, light_identify),
                 NULL
             }),
